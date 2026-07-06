@@ -13,7 +13,8 @@ contract Vendor is Ownable {
     error InvalidEthAmount();
     error InsufficientVendorTokenBalance(uint256 available, uint256 required);
     error EthTransferFailed(address to, uint256 amount);
-
+    error InvalidTokenAmount();
+    error InsufficientVendorEthBalance(uint256 available, uint256 required);
     //////////////////////
     /// State Variables //
     //////////////////////
@@ -30,6 +31,11 @@ contract Vendor is Ownable {
         address indexed buyer,
         uint256 amountOfETH,
         uint256 amountOfTokens
+    );
+    event SellTokens(
+        address indexed seller,
+        uint256 amountOfTokens,
+        uint256 amountOfETH
     );
     ///////////////////
     /// Constructor ///
@@ -63,5 +69,17 @@ contract Vendor is Ownable {
             revert EthTransferFailed(msg.sender, address(this).balance);
     }
 
-    function sellTokens(uint256 amount) public {}
+    function sellTokens(uint256 amount) public {
+        if (amount == 0) revert InvalidTokenAmount();
+        uint256 ethToBePayed = amount / tokensPerEth;
+        if (ethToBePayed > address(this).balance)
+            revert InsufficientVendorEthBalance(
+                address(this).balance,
+                ethToBePayed
+            );
+        yourToken.transferFrom(msg.sender, address(this), amount);
+        (bool success, ) = payable(msg.sender).call{value: ethToBePayed}("");
+        if (!(success)) revert EthTransferFailed(msg.sender, ethToBePayed);
+        emit SellTokens(msg.sender, amount, ethToBePayed);
+    }
 }

@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     YourToken: {
-      address: "0xd04ff4a75edd737a73e92b2f2274cb887d96e110",
+      address: "0x4d8e02bbfcf205828a8352af4376b165e123d7b0",
       abi: [
         {
           type: "constructor",
@@ -324,10 +324,10 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 18,
+      deployedOnBlock: 45,
     },
     Vendor: {
-      address: "0xc6b8fbf96cf7bbe45576417ec2163acecfa88ecc",
+      address: "0xeab25969e5285df34a3b245324d0b2b91e31cad4",
       abi: [
         {
           type: "constructor",
@@ -471,6 +471,31 @@ const deployedContracts = {
           anonymous: false,
         },
         {
+          type: "event",
+          name: "SellTokens",
+          inputs: [
+            {
+              name: "seller",
+              type: "address",
+              indexed: true,
+              internalType: "address",
+            },
+            {
+              name: "amountOfTokens",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+            {
+              name: "amountOfETH",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
+            },
+          ],
+          anonymous: false,
+        },
+        {
           type: "error",
           name: "EthTransferFailed",
           inputs: [
@@ -481,6 +506,22 @@ const deployedContracts = {
             },
             {
               name: "amount",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+        },
+        {
+          type: "error",
+          name: "InsufficientVendorEthBalance",
+          inputs: [
+            {
+              name: "available",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "required",
               type: "uint256",
               internalType: "uint256",
             },
@@ -509,6 +550,11 @@ const deployedContracts = {
         },
         {
           type: "error",
+          name: "InvalidTokenAmount",
+          inputs: [],
+        },
+        {
+          type: "error",
           name: "OwnableInvalidOwner",
           inputs: [
             {
@@ -531,7 +577,7 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 18,
+      deployedOnBlock: 46,
     },
   },
 } as const;
