@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     YourToken: {
-      address: "0x196dbcbb54b8ec4958c959d8949ebfe87ac2aaaf",
+      address: "0xd04ff4a75edd737a73e92b2f2274cb887d96e110",
       abi: [
         {
           type: "constructor",
@@ -324,10 +324,10 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 14,
+      deployedOnBlock: 18,
     },
     Vendor: {
-      address: "0x82c6d3ed4cd33d8ec1e51d0b5cc1d822eaa0c3dc",
+      address: "0xc6b8fbf96cf7bbe45576417ec2163acecfa88ecc",
       abi: [
         {
           type: "constructor",
@@ -472,6 +472,22 @@ const deployedContracts = {
         },
         {
           type: "error",
+          name: "EthTransferFailed",
+          inputs: [
+            {
+              name: "to",
+              type: "address",
+              internalType: "address",
+            },
+            {
+              name: "amount",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+        },
+        {
+          type: "error",
           name: "InsufficientVendorTokenBalance",
           inputs: [
             {
@@ -515,7 +531,7 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 15,
+      deployedOnBlock: 18,
     },
   },
 } as const;
